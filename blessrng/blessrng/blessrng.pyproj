@@ -37,6 +37,16 @@
     <Compile Include="apps\app\views.py" />
     <Compile Include="apps\app\__init__.py" />
     <Compile Include="apps\app\migrations\__init__.py" />
+    <Compile Include="apps\generators\admin.py" />
+    <Compile Include="apps\generators\apps.py" />
+    <Compile Include="apps\generators\migrations\__init__.py" />
+    <Compile Include="apps\generators\models.py" />
+    <Compile Include="apps\generators\tests.py" />
+    <Compile Include="apps\generators\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="apps\generators\views.py" />
+    <Compile Include="apps\generators\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="blessrng\__init__.py" />
     <Compile Include="blessrng\settings.py" />
@@ -53,10 +63,15 @@
     <Folder Include="apps\app\static\app\scripts\" />
     <Folder Include="apps\app\templates\" />
     <Folder Include="apps\app\templates\app\" />
+    <Folder Include="apps\generators\" />
+    <Folder Include="apps\generators\migrations\" />
+    <Folder Include="apps\generators\templates\" />
+    <Folder Include="apps\generators\templates\generators\" />
     <Folder Include="blessrng\" />
     <Folder Include="apps\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="apps\generators\templates\generators\index.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="apps\app\static\app\content\bootstrap.css" />
