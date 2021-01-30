@@ -25,6 +25,15 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0b168d5c-a38e-4944-a1d3-f57417e452f1'
 
+# Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1009224755040-ubbb6coif7ebm3aknbmqjfththp2j2qs.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ZVGkQ2bfWTRQPdbG-IQ0ISWl'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+LOGIN_URL = '/auth/login/google-oauth2/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -35,6 +44,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'app',
     'generators',
+    'social_django',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
