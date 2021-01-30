@@ -45,6 +45,9 @@
     <Compile Include="apps\generators\models_dir\dto\dto.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="apps\generators\models_dir\random_generators\password_generators.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="apps\generators\tests.py" />
     <Compile Include="apps\generators\urls.py">
       <SubType>Code</SubType>
@@ -71,6 +74,7 @@
     <Folder Include="apps\generators\migrations\" />
     <Folder Include="apps\generators\models_dir\" />
     <Folder Include="apps\generators\models_dir\dto\" />
+    <Folder Include="apps\generators\models_dir\random_generators\" />
     <Folder Include="apps\generators\templates\" />
     <Folder Include="apps\generators\templates\generators\" />
     <Folder Include="blessrng\" />
@@ -78,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="apps\generators\templates\generators\index.html" />
+    <Content Include="apps\generators\templates\generators\password_generation_page.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="apps\app\static\app\content\bootstrap.css" />
