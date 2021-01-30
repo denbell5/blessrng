@@ -4,5 +4,23 @@
 
 <h1>app/generators/templates/generators/index.html</h1>
 
+<form action="{% url 'generators:generate' %}" method="post">
+	{% csrf_token %}
+	<div>
+		<input type="text" name="floor" value="{{ random_int_dto.floor|default_if_none:"" }}" />
+	</div>
+	<div>
+		<input type="text" name="ceiling" value="{{ random_int_dto.ceiling|default_if_none:"" }}" />
+	</div>
+	<div>
+		<input type="submit" value="Generate">
+	</div>
+</form>
+
+{% if random_int_dto.value %}
+    <div>{{ random_int_dto.value }}</div>
+{% else %}
+{% endif %}
+
 {% endblock %}
 
