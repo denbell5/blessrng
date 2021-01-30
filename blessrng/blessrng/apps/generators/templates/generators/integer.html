@@ -4,7 +4,7 @@
 
 <h1>app/generators/templates/generators/index.html</h1>
 
-<form action="{% url 'generators:generate' %}" method="post">
+<form action="{% url 'generators:integer' %}" method="post">
 	{% csrf_token %}
 	<div>
 		<input type="text" name="floor" value="{{ random_int_dto.floor|default_if_none:"" }}" />
@@ -18,7 +18,7 @@
 </form>
 
 {% if random_int_dto.value %}
-    <div>{{ random_int_dto.value }}</div>
+<div>{{ random_int_dto.value }}</div>
 {% else %}
 {% endif %}
 
@@ -32,10 +32,9 @@
 	</div>
 </form>
 
-{% if password_dto.password  %}
-    <div>{{ password_dto.password }}</div>
+{% if password_dto.password %}
+<div>{{ password_dto.password }}</div>
 {% else %}
 {% endif %}
 
 {% endblock %}
-
