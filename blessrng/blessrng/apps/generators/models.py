@@ -3,16 +3,16 @@ from django.db import models
 # Create your models here.
 
 
-class Random_Int_Sequence(models.Model):
+class RandIntSet(models.Model):
     floor = models.IntegerField('floor')
     ceiling = models.IntegerField('ceiling')
-    sequence_Length = models.IntegerField('length')
+    length = models.IntegerField('length')
     generated_at = models.DateTimeField('date published')
 
 
-class Random_Int(models.Model):
-    sequence_id = models.ForeignKey(
-        Random_Int_Sequence, on_delete=models.CASCADE)
+class RandInt(models.Model):
+    set_id = models.ForeignKey(
+        RandIntSet, on_delete=models.CASCADE)
     value = models.IntegerField('value')
 
 
