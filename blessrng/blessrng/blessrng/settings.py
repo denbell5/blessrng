@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 import posixpath
+import blessrng.config as sensitive_config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,11 +24,11 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0b168d5c-a38e-4944-a1d3-f57417e452f1'
+SECRET_KEY = sensitive_config.SECRET_KEY
 
 # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1009224755040-ubbb6coif7ebm3aknbmqjfththp2j2qs.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ZVGkQ2bfWTRQPdbG-IQ0ISWl'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = sensitive_config.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = sensitive_config.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 LOGIN_URL = '/auth/login/google-oauth2/'
