@@ -1,28 +1,31 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
-class RandIntSet(models.Model):
-    floor = models.IntegerField('floor')
-    ceiling = models.IntegerField('ceiling')
-    length = models.IntegerField('length')
-    generated_at = models.DateTimeField('date published')
+class BaseSet(models.Model):
+    user = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.CASCADE)
+    generated_at = models.DateTimeField()
+    count = models.IntegerField()
+
+    class Meta:
+        abstract = True
 
 
-class RandInt(models.Model):
-    set_id = models.ForeignKey(
-        RandIntSet, on_delete=models.CASCADE)
-    value = models.IntegerField('value')
+class RandIntSet(BaseSet):
+    floor = models.IntegerField()
+    ceiling = models.IntegerField()
+    values = ArrayField(models.IntegerField())
 
 
-class RandPwdSet(models.Model):
-    length = models.IntegerField('length')
-    pwd_length = models.IntegerField('pwd_length')
-    generated_at = models.DateTimeField('generated_at')
+class RandPwdSet(BaseSet):
+    pwd_length = models.IntegerField()
+    values = ArrayField(models.CharField(max_length=64))
 
 
-class RandPwd(models.Model):
-    set_id = models.ForeignKey(
-        RandPwdSet, on_delete=models.CASCADE)
-    value = models.CharField('value', max_length=128)
+class RandWordSet(BaseSet):
+    all_text = models.CharField(max_length=32768)
+    word_length = models.IntegerField()
+    values = ArrayField(models.CharField(max_length=1024))

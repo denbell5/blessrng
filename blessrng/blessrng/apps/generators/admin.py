@@ -3,4 +3,5 @@ from .models import *
 # Register your models here.
 
 admin.site.register(RandIntSet)
-admin.site.register(RandInt)
+admin.site.register(RandPwdSet)
+admin.site.register(RandWordSet)
