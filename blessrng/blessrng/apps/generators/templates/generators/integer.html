@@ -7,33 +7,23 @@
 <form action="{% url 'generators:integer' %}" method="post">
 	{% csrf_token %}
 	<div>
-		<input type="text" name="floor" value="{{ random_int_dto.floor|default_if_none:"" }}" />
+		<input type="number" name="floor" value="{{ random_int_dto.floor|default_if_none:0 }}" />
 	</div>
 	<div>
-		<input type="text" name="ceiling" value="{{ random_int_dto.ceiling|default_if_none:"" }}" />
+		<input type="number" name="ceiling" value="{{ random_int_dto.ceiling|default_if_none:1 }}" />
+	</div>
+	<div>
+		<input type="number" name="count" min="1" value="{{ random_int_dto.count|default_if_none:1 }}" />
 	</div>
 	<div>
 		<input type="submit" value="Generate">
 	</div>
 </form>
 
-{% if random_int_dto.value %}
-<div>{{ random_int_dto.value }}</div>
-{% else %}
-{% endif %}
-
-<form action="{% url 'generators:generate_pass' %}" method="post">
-	{% csrf_token %}
-	<div>
-		<input type="text" name="password_length" value="{{ password_dto.length|default_if_none:"" }}" />
-	</div>
-	<div>
-		<input type="submit" value="Generate Password">
-	</div>
-</form>
-
-{% if password_dto.password %}
-<div>{{ password_dto.password }}</div>
+{% if random_int_dto.values %}
+{% for value in random_int_dto.values %}
+<div>{{ value }}</div>
+{% endfor %}
 {% else %}
 {% endif %}
 
