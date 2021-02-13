@@ -42,10 +42,10 @@
     <Compile Include="apps\generators\apps.py" />
     <Compile Include="apps\generators\migrations\__init__.py" />
     <Compile Include="apps\generators\models.py" />
-    <Compile Include="apps\generators\models_dir\dto\dto.py">
+    <Compile Include="apps\generators\data\dto\dto.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="apps\generators\models_dir\random_generators\password_generators.py">
+    <Compile Include="apps\generators\data\random_generators\password_generators.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="apps\generators\tests.py" />
@@ -72,9 +72,9 @@
     <Folder Include="apps\app\templates\app\" />
     <Folder Include="apps\generators\" />
     <Folder Include="apps\generators\migrations\" />
-    <Folder Include="apps\generators\models_dir\" />
-    <Folder Include="apps\generators\models_dir\dto\" />
-    <Folder Include="apps\generators\models_dir\random_generators\" />
+    <Folder Include="apps\generators\data\" />
+    <Folder Include="apps\generators\data\dto\" />
+    <Folder Include="apps\generators\data\random_generators\" />
     <Folder Include="apps\generators\templates\" />
     <Folder Include="apps\generators\templates\generators\" />
     <Folder Include="blessrng\" />

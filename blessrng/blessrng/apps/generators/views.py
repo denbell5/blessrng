@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from random import randint
-from generators.models_dir.dto.dto import *
-from generators.models_dir.random_generators.password_generators import generate_password
+from generators.data.dto.dto import *
+from generators.data.random_generators.password_generators import generate_password
 from generators.models import *
 # Create your views here.
 
