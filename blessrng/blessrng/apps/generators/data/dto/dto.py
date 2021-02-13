@@ -1,4 +1,10 @@
 class RandomIntDto:
+    class Const:
+        dto_name = 'random_int_dto'
+        floor_name = 'floor'
+        ceiling_name = 'ceiling'
+        value_name = 'value'
+
     def __init__(self, floor, ceiling, value):
         self.floor = floor
         self.ceiling = ceiling
