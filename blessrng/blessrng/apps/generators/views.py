@@ -1,37 +1,38 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.template import loader
 from random import randint
-from generators.models_dir.dto.dto import *
-from generators.models_dir.random_generators.password_generators import generate_password
+from generators.data.dto.dto import *
+from generators.data.random_generators.password_generators import generate_password
 from generators.models import *
+from generators.data.constants.constants import Const
 # Create your views here.
 
 
-def _get_randint_response(request, dto: RandomIntDto):
-    template = loader.get_template('generators/integer.html')
-    context = {'random_int_dto': dto}
+def __create_integer_response(request: HttpRequest, dto: RandomIntDto):
+    template = loader.get_template(Const.Http.RandInt.template_name)
+    context = {RandomIntDto.Const.dto_name: dto}
     return HttpResponse(template.render(context, request))
 
 
-def integer(request):
-    if request.method == 'GET':
+def integer(request: HttpRequest):
+    if request.method == Const.Http.Methods.get:
         return __integer_get(request)
-    elif request.method == 'POST':
+    elif request.method == Const.Http.Methods.post:
         return __integer_post(request)
 
 
-def __integer_get(request):
+def __integer_get(request: HttpRequest):
     dto = RandomIntDto(None, None, None)
-    return _get_randint_response(request, dto)
+    return __create_integer_response(request, dto)
 
 
-def __integer_post(request):
-    floor = int(request.POST['floor'])
-    ceiling = int(request.POST['ceiling'])
+def __integer_post(request: HttpRequest):
+    floor = int(request.POST[RandomIntDto.Const.floor_name])
+    ceiling = int(request.POST[RandomIntDto.Const.ceiling_name])
     value = randint(floor, ceiling)
     dto = RandomIntDto(floor, ceiling, value)
-    return _get_randint_response(request, dto)
+    return __create_integer_response(request, dto)
 
 
 def generate_pass(request):
