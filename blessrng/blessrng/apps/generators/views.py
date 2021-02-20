@@ -23,15 +23,18 @@ def integer(request: HttpRequest):
 
 
 def __integer_get(request: HttpRequest):
-    dto = RandomIntDto(None, None, None)
+    dto = RandomIntDto(1, None, None, None)
     return __create_integer_response(request, dto)
 
 
 def __integer_post(request: HttpRequest):
+    count = int(request.POST[RandomIntDto.Const.count_name])
     floor = int(request.POST[RandomIntDto.Const.floor_name])
     ceiling = int(request.POST[RandomIntDto.Const.ceiling_name])
-    value = randint(floor, ceiling)
-    dto = RandomIntDto(floor, ceiling, value)
+    values = []
+    for i in range(count):
+        values.append(randint(floor, ceiling))
+    dto = RandomIntDto(count, floor, ceiling, values)
     return __create_integer_response(request, dto)
 
 
