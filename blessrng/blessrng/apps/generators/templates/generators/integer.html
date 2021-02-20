@@ -2,29 +2,47 @@
 
 {% block content %}
 
-<h1>app/generators/templates/generators/index.html</h1>
+<div class="row justify-content-center">
+	<div class="col-auto">
 
-<form action="{% url 'generators:integer' %}" method="post">
-	{% csrf_token %}
-	<div>
-		<input type="number" name="floor" value="{{ random_int_dto.floor|default_if_none:0 }}" />
-	</div>
-	<div>
-		<input type="number" name="ceiling" value="{{ random_int_dto.ceiling|default_if_none:1 }}" />
-	</div>
-	<div>
-		<input type="number" name="count" min="1" value="{{ random_int_dto.count|default_if_none:1 }}" />
-	</div>
-	<div>
-		<input type="submit" value="Generate">
-	</div>
-</form>
+		<div class="row">
+			<div class="col-auto">
+				<h1 class="display-6">Generate integers in range</h1>
+				<form action="{% url 'generators:integer' %}" method="post" autocomplete="off">
+					{% csrf_token %}
+					<div class="mb-3">
+						<label for="floor" class="form-label">From</label>
+						<input type="number" class="form-control" id="floor" name="floor" placeholder="1"
+							value="{{ random_int_dto.floor }}">
+					</div>
+					<div class="mb-3">
+						<label for="ceiling" class="form-label">To</label>
+						<input type="number" class="form-control" id="ceiling" name="ceiling" placeholder="322"
+							value="{{ random_int_dto.ceiling }}" />
+					</div>
+					<div class="mb-4">
+						<label for="count" class="form-label">Length of numbers to generate:</label>
+						<input type="number" class="form-control" id="count" name="count" min="1" placeholder="1"
+							value="{{ random_int_dto.count }}" />
+					</div>
+					<div>
+						<input type="submit" value="Generate" class="btn btn-outline-secondary form-control">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center">
+				{% if random_int_dto.values %}
+				<h1 class="display-6 mt-4">Generated results</h1>
+				{% for value in random_int_dto.values %}
+				<div>{{ value }}</div>
+				{% endfor %}
+				{% else %}
+				{% endif %}
 
-{% if random_int_dto.values %}
-{% for value in random_int_dto.values %}
-<div>{{ value }}</div>
-{% endfor %}
-{% else %}
-{% endif %}
-
-{% endblock %}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+</div>
