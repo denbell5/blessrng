@@ -24,3 +24,12 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+svg.clickable-icon {
+    fill: var(--bs-gray);
+    cursor: pointer;
+}
+
+svg.clickable-icon:hover {
+    fill: var(--bs-gray-dark);
+}
