@@ -33,3 +33,13 @@ svg.clickable-icon {
 svg.clickable-icon:hover {
     fill: var(--bs-gray-dark);
 }
+
+@keyframes copy-icon-mouse-up {
+    25% {
+        opacity: 0;
+    }
+}
+
+svg.copy-icon-mouse-up {
+    animation: copy-icon-mouse-up 0.5s;
+}
