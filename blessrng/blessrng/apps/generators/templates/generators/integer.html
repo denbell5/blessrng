@@ -14,7 +14,7 @@
 					<div class="mb-3">
 						<div class="d-flex justify-content-between">
 							<label for="floor" class="form-label">From</label>
-							<label onclick="resetForm('int-form')" title="Clear form">
+							<div onclick="resetForm(this, 'int-form')" title="Refresh form">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									class="bi bi-arrow-counterclockwise clickable-icon" viewBox="0 0 16 16">
 									<path fill-rule="evenodd"
@@ -22,7 +22,7 @@
 									<path
 										d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
 								</svg>
-							</label>
+							</div>
 						</div>
 						<input type="number" class="form-control" id="floor" name="floor" placeholder="1"
 							value="{{ random_int_dto.floor|default_if_none:"" }}">

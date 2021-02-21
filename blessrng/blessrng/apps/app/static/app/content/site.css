@@ -43,3 +43,11 @@ svg.clickable-icon:hover {
 svg.copy-icon-mouse-up {
     animation: copy-icon-mouse-up 0.5s;
 }
+
+@keyframes refresh-icon-mouse-up {
+    100% { transform: rotate(-360deg);}
+}
+
+svg.refresh-icon-mouse-up {
+    animation: refresh-icon-mouse-up 0.5s;
+}
