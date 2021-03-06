@@ -6,6 +6,7 @@ from generators.data.dto.dto import *
 from generators.data.random_generators.password_generators import generate_password
 from generators.models import *
 from generators.data.constants.constants import Const
+from datetime import datetime, timezone
 # Create your views here.
 
 
@@ -28,6 +29,8 @@ def __integer_get(request: HttpRequest):
 
 
 def __integer_post(request: HttpRequest):
+    timestamp = datetime.now(timezone.utc)
+
     count = request.POST[RandomIntDto.Const.count_name]
     count = RandomIntDto.Const.count_default if count == '' else int(count)
     floor = request.POST[RandomIntDto.Const.floor_name]
@@ -39,6 +42,17 @@ def __integer_post(request: HttpRequest):
     values = []
     for i in range(count):
         values.append(randint(floor, ceiling))
+
+    intSet = RandIntSet(
+        user=None if request.user.is_anonymous else request.user,
+        generated_at=timestamp,
+        count=count,
+        floor=floor,
+        ceiling=ceiling,
+        values=values,
+    )
+    intSet.save()
+
     dto = RandomIntDto(count, floor, ceiling, values)
     return __create_integer_response(request, dto)
 
