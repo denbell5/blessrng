@@ -10,6 +10,9 @@ class RandomIntDto:
         floor_name = 'floor'
         ceiling_name = 'ceiling'
         value_name = 'value'
+        count_default = 1
+        floor_default = 1
+        ceiling_default = 322
 
     def __init__(self, count: int, floor: int, ceiling: int, values: List[int]):
         self.count = count
