@@ -15,4 +15,11 @@ function resetForm(clickedElement, id) {
             el.value = '';
         }
     });
+
+    const errorBlock = document.getElementById('errors');
+    if (errorBlock) {
+        setTimeout(() => {
+            errorBlock.parentNode.removeChild(errorBlock);
+        }, 1000);
+    }
 }

@@ -1,3 +1,4 @@
+from typing import Text
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 from django.template import loader
@@ -10,9 +11,12 @@ from datetime import datetime, timezone
 # Create your views here.
 
 
-def __create_integer_response(request: HttpRequest, dto: RandomIntDto):
+def __create_integer_response(request: HttpRequest, dto: RandomIntDto, errors: List[str]):
     template = loader.get_template(Const.Http.RandInt.template_name)
-    context = {RandomIntDto.Const.dto_name: dto}
+    context = {
+        RandomIntDto.Const.dto_name: dto,
+        Const.Http.error_list_name: errors
+    }
     return HttpResponse(template.render(context, request))
 
 
@@ -25,12 +29,13 @@ def integer(request: HttpRequest):
 
 def __integer_get(request: HttpRequest):
     dto = RandomIntDto(None, None, None, None)
-    return __create_integer_response(request, dto)
+    return __create_integer_response(request, dto, [])
 
 
 def __integer_post(request: HttpRequest):
     timestamp = datetime.now(timezone.utc)
 
+    # map
     count = request.POST[RandomIntDto.Const.count_name]
     count = RandomIntDto.Const.count_default if count == '' else int(count)
     floor = request.POST[RandomIntDto.Const.floor_name]
@@ -39,10 +44,22 @@ def __integer_post(request: HttpRequest):
     ceiling = RandomIntDto.Const.ceiling_default if ceiling == '' else int(
         ceiling)
 
+    # validate
+    errors = []
+    if (count < 1 or count > 100):
+        errors.append("'Length' must be between 1 and 100 exclusive.")
+    if (floor > ceiling):
+        errors.append("'From' can not be greater than 'To'.")
+    if (len(errors) != 0):
+        dto = RandomIntDto(count, floor, ceiling, None)
+        return __create_integer_response(request, dto, errors)
+
+    # generate
     values = []
     for i in range(count):
         values.append(randint(floor, ceiling))
 
+    # save
     intSet = RandIntSet(
         user=None if request.user.is_anonymous else request.user,
         generated_at=timestamp,
@@ -53,8 +70,9 @@ def __integer_post(request: HttpRequest):
     )
     intSet.save()
 
+    # respond
     dto = RandomIntDto(count, floor, ceiling, values)
-    return __create_integer_response(request, dto)
+    return __create_integer_response(request, dto, errors)
 
 
 def generate_pass(request):
