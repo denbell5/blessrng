@@ -1,5 +1,7 @@
 class Const:
     class Http:
+        error_list_name = 'errors'
+
         class Methods:
             post = 'POST'
             get = 'GET'
