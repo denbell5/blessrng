@@ -93,7 +93,7 @@ def __password_post(request: HttpRequest):
     password_length = 10 if password_length == '' else int(password_length)
     password_count = request.POST['password_count']
     password_count = 1 if password_count == '' else int(password_count)
-    passwords = generate_passwords(password_length, password_count)
+    
     
     # validate
     errors = []
@@ -105,8 +105,21 @@ def __password_post(request: HttpRequest):
         dto = RandomPasswordDto(password_length, passwords, password_count)
         return __create_password_response(request, dto, errors)
 
-
+    # generate
+    passwords = generate_passwords(password_length, password_count)
     
+    # save
+    timestamp = datetime.now(timezone.utc)
+    pwdSet = RandPwdSet(
+        user=None if request.user.is_anonymous else request.user,
+        generated_at=timestamp,
+        count= password_count,
+        pwd_length=password_length,
+        values=passwords,
+    )
+    pwdSet.save()
+
+    # respond    
     dto = RandomPasswordDto(password_length, passwords, password_count)
     return __create_password_response(request, dto, [])
 
