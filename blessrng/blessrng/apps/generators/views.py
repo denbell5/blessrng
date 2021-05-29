@@ -97,8 +97,8 @@ def __password_post(request: HttpRequest):
     
     # validate
     errors = []
-    if (password_count < 1 or password_count > 100):
-        errors.append("'Count' must be between 1 and 100 exclusive.")
+    if (password_count < 1 or password_count >= 64):
+        errors.append("'Count' must be between 1 and 64 exclusive.")
     if (password_length < 1):
         errors.append("Password can't have less than 1 character")
     if (len(errors) != 0):
