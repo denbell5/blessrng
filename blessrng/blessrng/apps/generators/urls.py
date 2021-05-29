@@ -11,5 +11,5 @@ urlpatterns = [
         views.integer,
         name=Const.Http.RandInt.name
     ),
-    path('generate_pass', views.generate_pass, name='generate_pass'),
+    path('password', views.password, name='password'),
 ]
