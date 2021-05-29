@@ -10,7 +10,7 @@ function copyToClipboardFrom(clickedElement, resultContainerId, resultElementTag
     var upperCaseTagName = resultElementTag.toUpperCase();
     resultContainer.childNodes.forEach(el => {
         if (el.tagName == upperCaseTagName) {
-            text += el.innerHTML + '\n';
+            text += el.innerText + '\n';
         }
     });
     var slicedText = text.slice(0, text.length - 1);
