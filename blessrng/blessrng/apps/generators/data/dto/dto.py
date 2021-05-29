@@ -22,6 +22,7 @@ class RandomIntDto:
 
 
 class RandomPasswordDto:
-    def __init__(self, length, password):
+    def __init__(self, length, passwords, count):
         self.length = length
-        self.password = password
+        self.passwords = passwords
+        self.count = count
