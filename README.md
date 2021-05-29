@@ -1,8 +1,17 @@
+Create virtual environment (has to be created in folder 'env' on the same level where manage.py is to be ignored by git)
+```
+python3 -m venv env
+```
+
+Activate virtual environment:
+```
+& ./env/Scripts/Activate.ps1
+```
+
 Create superuser:
 ```
 python manage.py createsuperuser
 ```
-
 
 Install all packages from requirements.txt:
 ```
