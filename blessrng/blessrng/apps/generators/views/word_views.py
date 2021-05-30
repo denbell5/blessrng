@@ -63,16 +63,19 @@ def __word_post(request):
         errors.append('Error you need to input correct number of words!')
         dto = RandomWordDto(alltext, number, value)
         return __create_word_response(request, dto, errors)
+    if (len(errors) != 0):
+        dto = RandomWordDto(alltext, number, value, None)
+        return __create_word_response(request, dto, errors)
 
     # save
     timestamp = datetime.now(timezone.utc)
-    pwdSet = RandPwdSet(
+    wordSet = RandWordSet(
         user=None if request.user.is_anonymous else request.user,
         generated_at=timestamp,
         alltext=alltext,
         number=number,
         value=value,
     )
-    pwdSet.save()
+    wordSet.save()
     dto = RandomWordDto(alltext, number, value)
     return __create_word_response(request, dto, errors)

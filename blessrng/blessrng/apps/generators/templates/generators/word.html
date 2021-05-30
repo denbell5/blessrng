@@ -10,7 +10,7 @@
                 <h1 class="display-6">Generate words</h1>
                 {% if errors %}
                 <div class="card border-danger mb-3" id="errors">
-                    <div class="card-header">ERROR!!!</div>
+                    <div class="card-header">Error something went wrong </div>
                     <div class="card-body text-danger">
                         {% for error in errors %}
                         <div>{{ error }}</div>
@@ -22,7 +22,7 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         <div class="d-flex justify-content-between">
-                            <label for="floor" class="form-label">For text</label>
+                            <label for="alltext" class="form-label">Text</label>
                             <div onclick="resetForm(this, 'word-form')" title="Refresh form">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     class="bi bi-arrow-counterclockwise clickable-icon" viewBox="0 0 16 16">
@@ -33,7 +33,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <input type="text" class="form-control" id="alltext" name="alltext" placeholder=" "
+                        <input type="textarea" class="form-control" id="alltext" name="alltext" placeholder=" "
                             value="{{ word_dto.alltext|default_if_none:"" }}">
                     </div>
                     <div class="mb-3">
