@@ -9,7 +9,6 @@ from generators.data.constants.constants import Const
 from datetime import datetime, timezone
 
 
-
 def __create_integer_response(request: HttpRequest, dto: RandomIntDto, errors: List[str]):
     template = loader.get_template(Const.Http.RandInt.template_name)
     context = {
