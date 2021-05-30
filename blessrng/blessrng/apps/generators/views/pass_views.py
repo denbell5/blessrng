@@ -59,7 +59,7 @@ def __password_post(request: HttpRequest):
     return __create_password_response(request, dto, [])
 
 
-def __create_password_response(request: HttpRequest, dto: RandomIntDto, errors: List[str]):
+def __create_password_response(request: HttpRequest, dto, errors: List[str]):
     template = loader.get_template('generators/password.html')
     context = {
         'passwords_dto': dto,
