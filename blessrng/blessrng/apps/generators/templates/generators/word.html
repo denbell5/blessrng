@@ -33,8 +33,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <input type="textarea" class="form-control" id="alltext" name="alltext" placeholder=" "
-                            value="{{ word_dto.alltext|default_if_none:"" }}">
+                        <textarea rows="10" cols="45" name="alltext" type="text"
+                            class="form-control">{{ word_dto.alltext|default_if_none:"" }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="ceiling" class="form-label">Number of words</label>

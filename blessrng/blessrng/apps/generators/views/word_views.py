@@ -48,34 +48,31 @@ def __word_post(request):
     errors = []
     if number == 1 and alltext == ' ':
         errors.append("Please input some words")
-        dto = RandomWordDto(alltext, number, value)
-        return __create_word_response(request, dto, errors)
+        #dto = RandomWordDto(alltext, number, value)
+        # return __create_word_response(request, dto, errors)
     if number < 0 or number == 0:
         errors.append(
             'You need to input only positive numbers bigger than 0 !')
-        dto = RandomWordDto(alltext, number, value)
-        return __create_word_response(request, dto, errors)
-    if number__of_words >= number:
-        value = random.sample(words, number)
-        dto = RandomWordDto(alltext, number, value)
-        return __create_word_response(request, dto, errors)
-    if number__of_words <= number:
+        #dto = RandomWordDto(alltext, number, value)
+        # return __create_word_response(request, dto, errors)
+    if number__of_words < number:
         errors.append('Error you need to input correct number of words!')
-        dto = RandomWordDto(alltext, number, value)
-        return __create_word_response(request, dto, errors)
+        #dto = RandomWordDto(alltext, number, value)
+        # return __create_word_response(request, dto, errors)
     if (len(errors) != 0):
-        dto = RandomWordDto(alltext, number, value, None)
+        dto = RandomWordDto(alltext, number, None)
         return __create_word_response(request, dto, errors)
-
+    value = random.sample(words, number)
     # save
     timestamp = datetime.now(timezone.utc)
     wordSet = RandWordSet(
         user=None if request.user.is_anonymous else request.user,
         generated_at=timestamp,
-        alltext=alltext,
-        number=number,
-        value=value,
+        count=number,
+        all_text=alltext,
+        values=value,
     )
     wordSet.save()
+
     dto = RandomWordDto(alltext, number, value)
     return __create_word_response(request, dto, errors)
