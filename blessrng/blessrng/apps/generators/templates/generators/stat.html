@@ -2,4 +2,19 @@
 
 {% block content %}
 <h1>Stat</h1>
+
+
+{% for record in dto.latest %}
+
+{% if record.type == "int" %}
+{% include "./widgets/int_stat_record.html" with record=record only %}
+
+{% elif record.type == "pwd" %}
+<!-- include widget for passwords -->
+
+{% elif record.type == "word" %}
+<!-- include widget for text -->
+
+{% endif %}
+{% endfor %}
 {% endblock %}

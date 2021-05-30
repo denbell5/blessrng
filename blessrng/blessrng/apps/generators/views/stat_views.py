@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpRequest
 from django.template import loader
 from random import randint
 from generators.data.dto.dto import *
+from generators.data.random_generators.stat_generators import *
 from generators.models import *
 from generators.data.constants.constants import Const
 from datetime import datetime, timezone
@@ -18,5 +19,8 @@ def __create_stat_response(request: HttpRequest, dto: StatDto):
 
 def stat(request: HttpRequest):
     # get all stat and create StatDto from it
-    dto = StatDto(latest=[])
+    latest = get_latest_stats()
+    dto = StatDto(
+        latest=latest
+    )
     return __create_stat_response(request, dto)
