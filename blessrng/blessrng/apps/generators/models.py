@@ -27,5 +27,4 @@ class RandPwdSet(BaseSet):
 
 class RandWordSet(BaseSet):
     all_text = models.CharField(max_length=32768)
-    word_length = models.IntegerField()
     values = ArrayField(models.CharField(max_length=1024))
