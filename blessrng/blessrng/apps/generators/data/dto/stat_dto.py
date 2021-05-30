@@ -10,8 +10,41 @@ class StatSetBaseDto:
 
 
 class StatDto:  # dto for all statistics: latest 10 requests, total requests, total from anon etc.
-    def __init__(self, latest: List[StatSetBaseDto]):
+    def __init__(self, latest: List[StatSetBaseDto],siteStat, userStat):
         self.latest = latest
+        self.siteStat = siteStat
+        self.userStat = userStat
+
+class SiteStatDto:
+    def __init__(self, int_gen_count,
+                 pwd_gen_count,
+                 word_gen_count,
+                 total_gen_count,
+                 anon_gen_count,
+                 registered_gen_count,
+                 registered_users,
+                 avg_gen_per_user):
+        
+        self.int_gen_count = int_gen_count
+        self.pwd_gen_count = pwd_gen_count
+        self.word_gen_count = word_gen_count
+
+        self.total_gen_count = total_gen_count
+
+        self.anon_gen_count = anon_gen_count
+        self.registered_gen_count = registered_gen_count
+        self.registered_users = registered_users
+        self.avg_gen_per_user = avg_gen_per_user
+
+class UserStatDto:
+    def __init__(self, int_gen_count,
+                 pwd_gen_count,
+                 word_gen_count,
+                 total_gen_count):
+        self.int_gen_count = int_gen_count
+        self.pwd_gen_count = pwd_gen_count
+        self.word_gen_count = word_gen_count
+        self.total_gen_count = total_gen_count
 
 
 class IntStatDto(StatSetBaseDto):
