@@ -1,4 +1,5 @@
 from django.urls import path
+from generators.views.word_views import text
 
 from . import views
 from generators.views.pass_views import password
@@ -15,5 +16,6 @@ urlpatterns = [
         name=Const.Http.RandInt.name
     ),
     path('password', password, name='password'),
+    path('word', text, name='word'),
     path('stat', stat, name='stat')
 ]

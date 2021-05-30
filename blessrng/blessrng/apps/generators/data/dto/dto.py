@@ -28,3 +28,10 @@ class RandomPasswordDto:
         self.length = length
         self.passwords = passwords
         self.count = count
+
+
+class RandomWordDto:
+    def __init__(self, alltext, number, value):
+        self.alltext = alltext
+        self.number = number
+        self.value = value
