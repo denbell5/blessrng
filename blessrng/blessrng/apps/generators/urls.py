@@ -1,15 +1,17 @@
 from django.urls import path
 
 from . import views
+from generators.views.pass_views import password
+from generators.views.int_views import integer
 from .data.constants.constants import Const
 
 app_name = 'generators'
 urlpatterns = [
-    path('', views.integer, name=Const.Http.RandInt.name),
+    path('', integer, name=Const.Http.RandInt.name),
     path(
         Const.Http.RandInt.url,
-        views.integer,
+        integer,
         name=Const.Http.RandInt.name
     ),
-    path('password', views.password, name='password'),
+    path('password', password, name='password'),
 ]
