@@ -1,4 +1,4 @@
-from generators.data.dto.dto import IntStatDto
+from generators.data.dto.stat_dto import IntStatDto
 from generators.models import RandIntSet
 
 

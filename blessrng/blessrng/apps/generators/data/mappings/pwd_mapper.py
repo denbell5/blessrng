@@ -1,4 +1,4 @@
-from generators.data.dto.dto import PwdStatDto
+from generators.data.dto.stat_dto import PwdStatDto
 from generators.models import RandPwdSet
 
 
