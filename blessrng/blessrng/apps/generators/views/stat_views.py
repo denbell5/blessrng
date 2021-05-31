@@ -2,7 +2,7 @@ from typing import Text
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 from django.template import loader
-from random import randint
+import random
 from generators.data.dto.dto import *
 from generators.data.random_generators.stat_generators import *
 from generators.data.mappings.int_mapper import *
@@ -40,7 +40,7 @@ def stat(request: HttpRequest):
     pwd_gen_count = RandPwdSet.objects.filter(user_id = usr_id).count()
     word_gen_count = RandWordSet.objects.filter(user_id = usr_id).count()
     total_gen_count = int_gen_count + pwd_gen_count + word_gen_count
-    user_stat_dto = UserStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count)
+    user_stat_dto = UserStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count, usr_id)
     
     # get random user entry
     entries = RandIntSet.objects.filter(user_id = usr_id)
@@ -57,7 +57,7 @@ def stat(request: HttpRequest):
     elif (type(random_entry) is RandWordSet) :
         random_entry_dto = map_word_to_stat_dto(random_entry)
     
-    dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest, random_entry = randorandom_entry_dto)
+    dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest, random_entry = random_entry_dto)
     
     return __create_stat_response(request, dto)
 

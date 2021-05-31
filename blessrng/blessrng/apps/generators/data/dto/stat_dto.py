@@ -41,7 +41,9 @@ class UserStatDto:
     def __init__(self, int_gen_count,
                  pwd_gen_count,
                  word_gen_count,
-                 total_gen_count):
+                 total_gen_count,
+                 user_id):
+        self.user_id = user_id
         self.int_gen_count = int_gen_count
         self.pwd_gen_count = pwd_gen_count
         self.word_gen_count = word_gen_count
