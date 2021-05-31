@@ -14,6 +14,7 @@ class StatDto:  # dto for all statistics: latest 10 requests, total requests, to
         self.latest = latest
         self.site_stat = site_stat
         self.user_stat = user_stat
+        self.random_entry = random_entry
 
 class SiteStatDto:
     def __init__(self, int_gen_count,
