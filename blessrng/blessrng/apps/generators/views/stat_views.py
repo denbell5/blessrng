@@ -57,7 +57,7 @@ def stat(request: HttpRequest):
     elif (type(random_entry) is RandWordSet) :
         random_entry_dto = map_word_to_stat_dto(random_entry)
     
-    dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest)
+    dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest, random_entry = randorandom_entry_dto)
     
     return __create_stat_response(request, dto)
 

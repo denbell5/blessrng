@@ -10,7 +10,7 @@ class StatSetBaseDto:
 
 
 class StatDto:  # dto for all statistics: latest 10 requests, total requests, total from anon etc.
-    def __init__(self, latest: List[StatSetBaseDto],site_stat, user_stat, random_entry):
+    def __init__(self, latest: List[StatSetBaseDto],site_stat, user_stat, random_entry: StatSetBaseDto):
         self.latest = latest
         self.site_stat = site_stat
         self.user_stat = user_stat
