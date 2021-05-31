@@ -13,14 +13,13 @@
 
 {% for record in dto.latest %}
 
-{% if record.type == "int" %}
-{% include "./widgets/int_stat_record.html" with record=record only %}
+<h1>Latest 10 entries</h1>
+{% for record in dto.latest %}
+<!-- get latest 10 entries -->
+{% include "./widgets/entry_record.html" with record=record only %}
 
-{% elif record.type == "pwd" %}
-<!-- include widget for passwords -->
+{% endfor %}
 
-{% elif record.type == "word" %}
-<!-- include widget for text -->
 {%else%}
      {% include "./widgets/site_stat.html" %}
 {% endif%}
