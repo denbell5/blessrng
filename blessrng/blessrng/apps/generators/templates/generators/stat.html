@@ -8,9 +8,13 @@
      {% include "./widgets/site_stat.html" %}
      
      {% include "./widgets/user_stat.html" %}
+        
     </div>
 
-
+    <!-- get all entries -->
+<div class="d-grid col-5 mx-auto">
+    <a type="button" role="button" class="btn btn-light" href="{% url 'generators:all_entries' %}" >Show all entries</a>
+</div>
 <!-- get random entry -->
 <h1>Random Entry</h1>
 {% include "./widgets/entry_record.html" with record=dto.random_entry only %}
