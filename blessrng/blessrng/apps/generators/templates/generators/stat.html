@@ -12,18 +12,17 @@
 
 
 <!-- get random entry -->
-{% with entry=dto.random_entry %}
 <h1>Random Entry</h1>
 {% include "./widgets/entry_record.html" with record=dto.random_entry only %}
-{% endwith %}
 
+<!-- get latest 10 entries -->
 <h1>Latest 10 entries</h1>
 {% for record in dto.latest %}
-<!-- get latest 10 entries -->
 {% include "./widgets/entry_record.html" with record=record only %}
 
 {% endfor %}
 
+<!-- if user is anonymous show only site statistics-->
 {%else%}
      {% include "./widgets/site_stat.html" %}
 {% endif%}

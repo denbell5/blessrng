@@ -5,7 +5,9 @@
         Generated {{ record.count }} passwords with length of {{record.length}}.
     </div>
     <div>
-        {{ record.passwords }}
+    {% for password in record.passwords %}
+      [ div{{password}} ]
+    {% endfor %}
     </div>
     </div>
 </div>
