@@ -2,10 +2,11 @@
 
 {% block content %}
 
-<!-- if user is not anonymous -->
-{% if dto.user_stat.user_id%}
     <div class="row justify-content-center">
      {% include "./widgets/site_stat.html" %}
+
+<!-- if user is not anonymous -->
+{% if dto.user_stat.user_id%}
      
      {% include "./widgets/user_stat.html" %}
         
@@ -26,9 +27,7 @@
 
 {% endfor %}
 
-<!-- if user is anonymous show only site statistics-->
-{%else%}
-     {% include "./widgets/site_stat.html" %}
+
 {% endif%}
 
 {% endblock %}
