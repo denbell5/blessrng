@@ -4,9 +4,10 @@ from generators.models import *
 
 
 class StatSetBaseDto:
-    def __init__(self, type: str, generated_at: datetime):
+    def __init__(self, type: str, generated_at: datetime, count: int):
         self.type = type
         self.generated_at: generated_at
+        self.count = count
 
 
 class StatDto:  # dto for all statistics: latest 10 requests, total requests, total from anon etc.
@@ -77,9 +78,9 @@ class PwdStatDto(StatSetBaseDto):
     ):
         self.type = type
         self.generated_at = generated_at
+        self.count = count
         self.length = length
         self.passwords = passwords
-        self.count = count
 
 
 class WordStatDto(StatSetBaseDto):
@@ -87,10 +88,12 @@ class WordStatDto(StatSetBaseDto):
         self,
         type: str,
         generated_at: datetime,
+        count: int,
         alltext: str,
         values: List[str]
     ):
         self.type = type
         self.generated_at = generated_at
+        self.count = count
         self.alltext = alltext
         self.values = values
