@@ -1,0 +1,13 @@
+<div class="card border-dark mb-3">
+    <h5 class="card-header">Password | {{ record.generated_at }}</h5>
+    <div class="card-body text-dark">
+    <div class="card-text">
+        Generated {{ record.count }} passwords with length of {{record.length}}.
+    </div>
+    <div>
+    {% for password in record.passwords %}
+      [ div{{password}} ]
+    {% endfor %}
+    </div>
+    </div>
+</div>

@@ -1,68 +1,34 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
+
+<!-- if user is not anonymous -->
+{% if dto.user_stat.user_id%}
     <div class="row justify-content-center">
+     {% include "./widgets/site_stat.html" %}
+     
+     {% include "./widgets/user_stat.html" %}
         
-    <div class="col-auto">
-     <h1 class="row justify-content-center">Statistics</h1>
-        <div class="container">
-            <div class="row align-items-start">
-              <div class="col-auto">
-                  <div for="int_gen_count" class="row align-items-start justify-content-end">Int generations:</div>
-                  <div for="pwd_gen_count" class="row align-items-start justify-content-end">Password generations:</div>
-                  <div for="word_gen_count" class="row align-items-start justify-content-end">Random word generations:</div>
-                  <div for="anon_gen_count" class="row align-items-start justify-content-end">Anonymous generations:</div>
-                  <div for="registered_gen_count" class="row align-items-start justify-content-end">Registered user's generations:</div>
-                  <div for="total_gen_count" class="row align-items-start justify-content-end">Total generations:</div>
-                  <div for="registered_users" class="row align-items-start justify-content-end">Registered users:</div>
-                  <div for="avg_gen_per_user" class="row align-items-start justify-content-end">Average generations per user:</div>
-              </div>
-              <div class="col">
-                  <div>{{ dto.siteStat.int_gen_count }}</div>
-                  <div>{{ dto.siteStat.pwd_gen_count }}</div>
-                  <div>{{ dto.siteStat.word_gen_count }}</div>
-                  <div>{{ dto.siteStat.anon_gen_count }}</div>
-                  <div>{{ dto.siteStat.registered_gen_count }}</div>
-                  <div>{{ dto.siteStat.total_gen_count }}</div>
-                  <div>{{ dto.siteStat.registered_users }}</div>
-                  <div>{{ dto.siteStat.avg_gen_per_user }}</div>
-              </div>
-            </div>
-        </div>
-    </div>
-     <div class="col-auto">
-     <h1 class="row justify-content-center">User Statistics</h1>
-        <div class="container">
-            <div class="row align-items-start">
-              <div class="col-auto">
-                  <div for="int_gen_count" class="row align-items-start justify-content-end">Int generations:</div>
-                  <div for="pwd_gen_count" class="row align-items-start justify-content-end">Password generations:</div>
-                  <div for="word_gen_count" class="row align-items-start justify-content-end">Random word generations:</div>
-                  <div for="total_gen_count" class="row align-items-start justify-content-end">Total generations:</div>
-              </div>
-              <div class="col">
-                  <div>{{ dto.userStat.int_gen_count }}</div>
-                  <div>{{ dto.userStat.pwd_gen_count }}</div>
-                  <div>{{ dto.userStat.word_gen_count }}</div>
-                  <div>{{ dto.userStat.total_gen_count }}</div>
-              </div>
-            </div>
-        </div>
-    </div>
     </div>
 
+    <!-- get all entries -->
+<div class="d-grid col-5 mx-auto">
+    <a type="button" role="button" class="btn btn-light" href="{% url 'generators:all_entries' %}" >Show all entries</a>
+</div>
+<!-- get random entry -->
+<h1>Random Entry</h1>
+{% include "./widgets/entry_record.html" with record=dto.random_entry only %}
 
+<!-- get latest 10 entries -->
+<h1>Latest 10 entries</h1>
 {% for record in dto.latest %}
+{% include "./widgets/entry_record.html" with record=record only %}
 
-{% if record.type == "int" %}
-{% include "./widgets/int_stat_record.html" with record=record only %}
-
-{% elif record.type == "pwd" %}
-<!-- include widget for passwords -->
-
-{% elif record.type == "word" %}
-<!-- include widget for text -->
-
-{% endif %}
 {% endfor %}
+
+<!-- if user is anonymous show only site statistics-->
+{%else%}
+     {% include "./widgets/site_stat.html" %}
+{% endif%}
+
 {% endblock %}

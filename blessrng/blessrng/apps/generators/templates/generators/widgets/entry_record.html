@@ -1,0 +1,13 @@
+{% if record.type == "int" %}
+
+{% include "./int_stat_record.html" with record=record only %}
+
+{% elif record.type == "pwd" %}
+
+{% include "./pwd_stat_record.html" with record=record only %}
+
+{% elif record.type == "word" %}
+
+{% include "./word_stat_record.html" with record=record only %}
+
+{% endif %}

@@ -2,9 +2,12 @@ from typing import Text
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 from django.template import loader
-from random import randint
+import random
 from generators.data.dto.dto import *
 from generators.data.random_generators.stat_generators import *
+from generators.data.mappings.int_mapper import *
+from generators.data.mappings.pwd_mapper import *
+from generators.data.mappings.word_mapper import *
 from generators.models import *
 from generators.data.constants.constants import Const
 from datetime import datetime, timezone
@@ -37,9 +40,24 @@ def stat(request: HttpRequest):
     pwd_gen_count = RandPwdSet.objects.filter(user_id = usr_id).count()
     word_gen_count = RandWordSet.objects.filter(user_id = usr_id).count()
     total_gen_count = int_gen_count + pwd_gen_count + word_gen_count
-    user_stat_dto = UserStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count)
-
-    dto = StatDto(siteStat = site_stat_dto, userStat = user_stat_dto, latest=latest)
+    user_stat_dto = UserStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count, usr_id)
+    
+    # get random user entry
+    entries = RandIntSet.objects.filter(user_id = usr_id)
+    entries_list = list(entries)
+    entries = RandPwdSet.objects.filter(user_id = usr_id)
+    entries_list += list(entries)
+    entries = RandWordSet.objects.filter(user_id = usr_id)
+    entries_list += list(entries)
+    random_entry = random.choice(entries_list)
+    if (type(random_entry) is RandIntSet) :
+        random_entry_dto = map_int_to_stat_dto(random_entry)
+    elif (type(random_entry) is RandPwdSet) :
+        random_entry_dto = map_pwd_to_stat_dto(random_entry)
+    elif (type(random_entry) is RandWordSet) :
+        random_entry_dto = map_word_to_stat_dto(random_entry)
+    
+    dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest, random_entry = random_entry_dto)
     
     return __create_stat_response(request, dto)
 
