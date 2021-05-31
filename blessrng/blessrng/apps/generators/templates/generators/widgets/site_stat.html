@@ -1,26 +1,29 @@
-<div class="col-auto">
-    <h1 class="row justify-content-center">Statistics</h1>
-    <div class="container">
-        <div class="row align-items-start justify-content-center">
-            <div class="col-auto">
-                <div for="int_gen_count" class="row align-items-start justify-content-end">Int generations:</div>
-                <div for="pwd_gen_count" class="row align-items-start justify-content-end">Password generations:</div>
-                <div for="word_gen_count" class="row align-items-start justify-content-end">Random word generations:</div>
-                <div for="anon_gen_count" class="row align-items-start justify-content-end">Anonymous generations:</div>
-                <div for="registered_gen_count" class="row align-items-start justify-content-end">Registered user's generations:</div>
-                <div for="total_gen_count" class="row align-items-start justify-content-end">Total generations:</div>
-                <div for="registered_users" class="row align-items-start justify-content-end">Registered users:</div>
-                <div for="avg_gen_per_user" class="row align-items-start justify-content-end">Average generations per user:</div>
-            </div>
-            <div class="col-auto">
-                <div>{{ dto.site_stat.int_gen_count }}</div>
-                <div>{{ dto.site_stat.pwd_gen_count }}</div>
-                <div>{{ dto.site_stat.word_gen_count }}</div>
-                <div>{{ dto.site_stat.anon_gen_count }}</div>
-                <div>{{ dto.site_stat.registered_gen_count }}</div>
-                <div>{{ dto.site_stat.total_gen_count }}</div>
-                <div>{{ dto.site_stat.registered_users }}</div>
-                <div>{{ dto.site_stat.avg_gen_per_user }}</div>
+<div class="col-auto card border-dark mb-3">
+    <h1 class="row justify-content-center card-header">Statistics</h1>
+    <div class="card-body text-dark">
+        <div class="card-text">
+            <div class="row align-items-start justify-content-center">
+                <div class="col-auto">
+                    <div for="int_gen_count" class="row align-items-start justify-content-end">Int generations:</div>
+                    <div for="pwd_gen_count" class="row align-items-start justify-content-end">Password generations:</div>
+                    <div for="word_gen_count" class="row align-items-start justify-content-end">Random word generations:</div>
+                    <div for="anon_gen_count" class="row align-items-start justify-content-end">Anonymous generations:</div>
+                    <div for="registered_gen_count" class="row align-items-start justify-content-end">Registered user's generations:</div>
+                    <div for="total_gen_count" class="row align-items-start justify-content-end">Total generations:</div>
+                    <div for="registered_users" class="row align-items-start justify-content-end">Registered users:</div>
+                    <div for="avg_gen_per_user" class="row align-items-start justify-content-end">Average generations per user:</div>
+                </div>
+                <div class="col-auto">
+                    <div>{{ dto.site_stat.int_gen_count }}</div>
+                    <div>{{ dto.site_stat.pwd_gen_count }}</div>
+                    <div>{{ dto.site_stat.word_gen_count }}</div>
+                    <div>{{ dto.site_stat.anon_gen_count }}</div>
+                    <div>{{ dto.site_stat.registered_gen_count }}</div>
+                    <div>{{ dto.site_stat.total_gen_count }}</div>
+                    <div>{{ dto.site_stat.registered_users }}</div>
+                    <div>{{ dto.site_stat.avg_gen_per_user }}</div>
+                </div>
+            
             </div>
         </div>
     </div>

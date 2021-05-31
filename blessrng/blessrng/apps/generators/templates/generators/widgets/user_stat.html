@@ -1,19 +1,21 @@
-<div class="col-auto">
-     <h1 class="row justify-content-center">User Statistics</h1>
-        <div class="container">
-            <div class="row align-items-start">
-              <div class="col-auto">
-                  <div for="int_gen_count" class="row align-items-start justify-content-end">Int generations:</div>
-                  <div for="pwd_gen_count" class="row align-items-start justify-content-end">Password generations:</div>
-                  <div for="word_gen_count" class="row align-items-start justify-content-end">Random word generations:</div>
-                  <div for="total_gen_count" class="row align-items-start justify-content-end">Total generations:</div>
+<div class="col-auto card border-dark mb-3">
+     <h1 class="row justify-content-center card-header">User Statistics</h1>
+        <div class="card-body text-dark">
+              <div class="card-text">
+               <div class="row align-items-start">
+                  <div class="col-auto">
+                      <div for="int_gen_count" class="row align-items-start justify-content-end">Int generations:</div>
+                      <div for="pwd_gen_count" class="row align-items-start justify-content-end">Password generations:</div>
+                      <div for="word_gen_count" class="row align-items-start justify-content-end">Random word generations:</div>
+                      <div for="total_gen_count" class="row align-items-start justify-content-end">Total generations:</div>
+                  </div>
+                  <div class="col-auto">
+                      <div>{{ dto.user_stat.int_gen_count }}</div>
+                      <div>{{ dto.user_stat.pwd_gen_count }}</div>
+                      <div>{{ dto.user_stat.word_gen_count }}</div>
+                      <div>{{ dto.user_stat.total_gen_count }}</div>
+                  </div>
+               </div>
               </div>
-              <div class="col-auto">
-                  <div>{{ dto.user_stat.int_gen_count }}</div>
-                  <div>{{ dto.user_stat.pwd_gen_count }}</div>
-                  <div>{{ dto.user_stat.word_gen_count }}</div>
-                  <div>{{ dto.user_stat.total_gen_count }}</div>
-              </div>
-            </div>
         </div>
-    </div>
+</div>
