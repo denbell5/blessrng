@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<!-- get latest 10 entries -->
+<!-- check if there is any entry-->
+{% if dto.entries %}
+<!-- get 5 entries -->
 {% for record in dto.entries %}
 {% include "./widgets/entry_record.html" with record=record only %}
-
 {% endfor %}
-
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -25,5 +25,10 @@
         {% endif %}
     </span>
 </div>
+
+{% else %}
+<h1 class="row justify-content-center">You have no entries yes</h1>
+{% endif %}
+
 
 {% endblock %}

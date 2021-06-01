@@ -49,13 +49,15 @@ def stat(request: HttpRequest):
     entries_list += list(entries)
     entries = RandWordSet.objects.filter(user_id = usr_id)
     entries_list += list(entries)
-    random_entry = random.choice(entries_list)
+    random_entry = random.choice(entries_list) if entries_list else []
     if (type(random_entry) is RandIntSet) :
         random_entry_dto = map_int_to_stat_dto(random_entry)
     elif (type(random_entry) is RandPwdSet) :
         random_entry_dto = map_pwd_to_stat_dto(random_entry)
     elif (type(random_entry) is RandWordSet) :
         random_entry_dto = map_word_to_stat_dto(random_entry)
+    else:
+        random_entry_dto = None
     
     dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest, random_entry = random_entry_dto)
     
