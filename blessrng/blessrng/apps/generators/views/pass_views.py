@@ -41,7 +41,8 @@ def __password_post(request: HttpRequest):
         return __create_password_response(request, dto, errors)
 
     # generate
-    passwords = generate_passwords(password_length, password_count)
+    allow = True if 'allow_special_characters' in request.POST else False
+    passwords = generate_passwords(password_length, password_count, allow)
     
     # save
     timestamp = datetime.now(timezone.utc)

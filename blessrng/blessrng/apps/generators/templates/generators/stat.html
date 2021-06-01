@@ -1,0 +1,39 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+     {% include "./widgets/site_stat.html" %}
+
+<!-- if user is not anonymous -->
+{% if dto.user_stat.user_id%}
+     
+     {% include "./widgets/user_stat.html" %}
+        
+    </div>
+
+    <!-- get all entries -->
+<div class="d-grid col-5 mx-auto">
+    <a type="button" role="button" class="btn btn-light border-dark" href="{% url 'generators:all_entries' %}" >Show all entries</a>
+</div>
+<!-- check if it is any entry -->
+{% if dto.random_entry %}
+<!-- get random entry -->
+<h1>Random Entry</h1>
+{% include "./widgets/entry_record.html" with record=dto.random_entry only %}
+
+<!-- get latest 10 entries -->
+<h1>Latest 10 entries</h1>
+{% for record in dto.latest %}
+{% include "./widgets/entry_record.html" with record=record only %}
+{% endfor %}
+
+{% else %}
+<h1 class="row justify-content-center">You have no entries yes</h1>
+{% endif %}
+
+
+
+{% endif %}
+
+{% endblock %}
