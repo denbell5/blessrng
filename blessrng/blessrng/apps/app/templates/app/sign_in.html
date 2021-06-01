@@ -40,7 +40,10 @@
                         </p>
                         {% endfor %}
                         {% else %}
+                        
+                        {% if request.method != 'GET' %}
                         <div> You were successfully registered </div>
+                        {% endif %}
 
                         {% endif %}
                     </form>
