@@ -37,7 +37,7 @@ def username_is_valid(username: str):
     else:
         return False
 
-def sign_in_validation_errors(email,password,username):
+def sign_up_validation_errors(email,password,username):
     errors = []
     if(not email_is_valid(email)):
         errors.append('Email is not valid')

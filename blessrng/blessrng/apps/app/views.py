@@ -49,36 +49,36 @@ def about(request):
     )
 
 
-def sign_in(request):
+def sign_up(request):
     
     if request.method == 'GET':
         username = None
         email = None
         password = None
         errors = []
-        return __create_sign_in_responce(request, username, email, password, errors)
+        return __create_sign_up_responce(request, username, email, password, errors)
     elif request.method == 'POST':
         username = str(request.POST['username'])
         email = str(request.POST['email'])
         password = str(request.POST['password'])
         
     #validation
-    errors = sign_in_validation_errors(email,password,username)
+    errors = sign_up_validation_errors(email,password,username)
     if (User.objects.filter(username=username).exists()):
         errors.append('user allready exists')
     if (len(errors) != 0):
-        return __create_sign_in_responce(request, username, email, password, errors)
+        return __create_sign_up_responce(request, username, email, password, errors)
 
     #save user 
     user = User.objects.create_user(username, email, password)
 
-    return __create_sign_in_responce(request, username, email, password, errors)
+    return __create_sign_up_responce(request, username, email, password, errors)
 
 
 
 
-def __create_sign_in_responce(request, username, email, password, errors):
-    template = loader.get_template('app/sign_in.html')
+def __create_sign_up_responce(request, username, email, password, errors):
+    template = loader.get_template('app/sign_up.html')
     context = {'username': username,
                'email': email,
                'password': password,
