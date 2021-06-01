@@ -64,6 +64,8 @@ def sign_in(request):
         
     #validation
     errors = sign_in_validation_errors(email,password,username)
+    if (User.objects.filter(username=username).exists()):
+        errors.append('user allready exists')
     if (len(errors) != 0):
         return __create_sign_in_responce(request, username, email, password, errors)
 
