@@ -36,7 +36,7 @@ def __word_post(request):
     # map
 
     alltext = request.POST['alltext']
-    alltext = ' ' if alltext == "" else str(alltext)
+    alltext = '' if alltext == "" else str(alltext)
     number = request.POST['number']
     number = 1 if number == '' else int(number)
     leters = "".join(list(
@@ -46,7 +46,7 @@ def __word_post(request):
     value = ""
     # validator
     errors = []
-    if number == 1 and alltext == ' ':
+    if not alltext.strip():
         errors.append("Please input some words")
         #dto = RandomWordDto(alltext, number, value)
         # return __create_word_response(request, dto, errors)
