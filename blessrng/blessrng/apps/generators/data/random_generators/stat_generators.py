@@ -6,10 +6,10 @@ from generators.data.mappings.word_mapper import *
 from generators.models import *
 
 
-def get_latest_stats():
-    ints = RandIntSet.objects.order_by('-generated_at')[:10]
-    pwds = RandPwdSet.objects.order_by('-generated_at')[:10]
-    wrds = RandWordSet.objects.order_by('-generated_at')[:10]
+def get_latest_stats(user_id):
+    ints = RandIntSet.objects.filter(user_id = user_id).order_by('-generated_at')[:10]
+    pwds = RandPwdSet.objects.filter(user_id = user_id).order_by('-generated_at')[:10]
+    wrds = RandWordSet.objects.filter(user_id = user_id).order_by('-generated_at')[:10]
     int_dtos = list(map(lambda obj: map_int_to_stat_dto(obj), ints))
     pwd_dtos = list(map(lambda obj: map_pwd_to_stat_dto(obj), pwds))
     word_dtos = list(map(lambda obj: map_word_to_stat_dto(obj), wrds))
