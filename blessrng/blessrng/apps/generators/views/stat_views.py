@@ -17,9 +17,10 @@ from generators.data.dto.stat_dto import *
 
 
 def stat(request: HttpRequest):
+    usr_id = request.user.id
+    latest = get_latest_stats(usr_id)
+    
     # get all stat and create StatDto from it
-    latest = get_latest_stats()
-
     int_gen_count = RandIntSet.objects.count() 
     pwd_gen_count = RandPwdSet.objects.count()
     word_gen_count = RandWordSet.objects.count()
@@ -35,7 +36,6 @@ def stat(request: HttpRequest):
     site_stat_dto = SiteStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count, anon_gen_count, registered_gen_count, registered_users, avg_gen_per_user)
     
     # get user stat 
-    usr_id = request.user.id
     int_gen_count = RandIntSet.objects.filter(user_id = usr_id).count() 
     pwd_gen_count = RandPwdSet.objects.filter(user_id = usr_id).count()
     word_gen_count = RandWordSet.objects.filter(user_id = usr_id).count()
