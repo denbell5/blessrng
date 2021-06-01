@@ -17,9 +17,10 @@ from generators.data.dto.stat_dto import *
 
 
 def stat(request: HttpRequest):
+    usr_id = request.user.id
+    latest = get_latest_stats(usr_id)
+    
     # get all stat and create StatDto from it
-    latest = get_latest_stats()
-
     int_gen_count = RandIntSet.objects.count() 
     pwd_gen_count = RandPwdSet.objects.count()
     word_gen_count = RandWordSet.objects.count()
@@ -35,7 +36,6 @@ def stat(request: HttpRequest):
     site_stat_dto = SiteStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count, anon_gen_count, registered_gen_count, registered_users, avg_gen_per_user)
     
     # get user stat 
-    usr_id = request.user.id
     int_gen_count = RandIntSet.objects.filter(user_id = usr_id).count() 
     pwd_gen_count = RandPwdSet.objects.filter(user_id = usr_id).count()
     word_gen_count = RandWordSet.objects.filter(user_id = usr_id).count()
@@ -49,13 +49,15 @@ def stat(request: HttpRequest):
     entries_list += list(entries)
     entries = RandWordSet.objects.filter(user_id = usr_id)
     entries_list += list(entries)
-    random_entry = random.choice(entries_list)
+    random_entry = random.choice(entries_list) if entries_list else []
     if (type(random_entry) is RandIntSet) :
         random_entry_dto = map_int_to_stat_dto(random_entry)
     elif (type(random_entry) is RandPwdSet) :
         random_entry_dto = map_pwd_to_stat_dto(random_entry)
     elif (type(random_entry) is RandWordSet) :
         random_entry_dto = map_word_to_stat_dto(random_entry)
+    else:
+        random_entry_dto = None
     
     dto = StatDto(site_stat = site_stat_dto, user_stat = user_stat_dto, latest=latest, random_entry = random_entry_dto)
     

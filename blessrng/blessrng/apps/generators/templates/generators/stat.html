@@ -16,6 +16,8 @@
 <div class="d-grid col-5 mx-auto">
     <a type="button" role="button" class="btn btn-light border-dark" href="{% url 'generators:all_entries' %}" >Show all entries</a>
 </div>
+<!-- check if it is any entry -->
+{% if dto.random_entry %}
 <!-- get random entry -->
 <h1>Random Entry</h1>
 {% include "./widgets/entry_record.html" with record=dto.random_entry only %}
@@ -24,10 +26,14 @@
 <h1>Latest 10 entries</h1>
 {% for record in dto.latest %}
 {% include "./widgets/entry_record.html" with record=record only %}
-
 {% endfor %}
 
+{% else %}
+<h1 class="row justify-content-center">You have no entries yes</h1>
+{% endif %}
 
-{% endif%}
+
+
+{% endif %}
 
 {% endblock %}
