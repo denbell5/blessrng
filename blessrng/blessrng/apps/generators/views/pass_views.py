@@ -18,7 +18,7 @@ def password(request: HttpRequest):
 
 def __password_get(request: HttpRequest):
     dto = RandomPasswordDto(None, None, None)
-    return __create_password_response(request, dto, [])
+    return __create_password_response(request, dto, [], True)
 
 
 def __password_post(request: HttpRequest):
@@ -27,8 +27,8 @@ def __password_post(request: HttpRequest):
     password_length = 10 if password_length == '' else int(password_length)
     password_count = request.POST['password_count']
     password_count = 1 if password_count == '' else int(password_count)
-    
-    
+    allow = True if 'allow_special_characters' in request.POST else False
+
     # validate
     passwords = []
     errors = []
@@ -40,10 +40,9 @@ def __password_post(request: HttpRequest):
         errors.append("Password can't have less than 1 character")
     if (len(errors) != 0):
         dto = RandomPasswordDto(password_length, passwords, password_count)
-        return __create_password_response(request, dto, errors)
+        return __create_password_response(request, dto, errors, allow)
 
     # generate
-    allow = True if 'allow_special_characters' in request.POST else False
     passwords = generate_passwords(password_length, password_count, allow)
     
     # save
@@ -59,13 +58,14 @@ def __password_post(request: HttpRequest):
 
     # respond    
     dto = RandomPasswordDto(password_length, passwords, password_count)
-    return __create_password_response(request, dto, [])
+    return __create_password_response(request, dto, [], allow)
 
 
-def __create_password_response(request: HttpRequest, dto, errors: List[str]):
+def __create_password_response(request: HttpRequest, dto, errors: List[str], isChecked: bool):
     template = loader.get_template('generators/password.html')
     context = {
         'passwords_dto': dto,
+        'isChecked': 'checked' if isChecked else '',
         Const.Http.error_list_name: errors
     }
     return HttpResponse(template.render(context, request))
