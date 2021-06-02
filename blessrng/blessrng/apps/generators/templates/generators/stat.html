@@ -13,9 +13,6 @@
     </div>
 
     <!-- get all entries -->
-<div class="d-grid col-5 mx-auto">
-    <a type="button" role="button" class="btn btn-light border-dark" href="{% url 'generators:all_entries' %}" >Show all entries</a>
-</div>
 <!-- check if it is any entry -->
 {% if dto.random_entry %}
 <!-- get random entry -->
@@ -23,7 +20,10 @@
 {% include "./widgets/entry_record.html" with record=dto.random_entry only %}
 
 <!-- get latest 10 entries -->
-<h1>Latest 10 entries</h1>
+<div class="row">
+    <h1 class="col-3">Latest 10 entries</h1>
+    <ul class="col-auto nav navbar-nav"><li><a class="nav-link fs-3 fw-light " href="{% url 'generators:all_entries' %}" >(See all)</a></li></ul>
+</div>
 {% for record in dto.latest %}
 {% include "./widgets/entry_record.html" with record=record only %}
 {% endfor %}
