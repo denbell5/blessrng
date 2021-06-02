@@ -2,10 +2,25 @@
     <h5 class="card-header">Random words | {{ record.generated_at }}</h5>
     <div class="card-body text-dark">
     <div class="card-text">
-        Generated {{ record.count }} words from text {{ record.alltext }}.
+        Generated <mark>{{ record.count }} words</mark> from
+        <details>
+            <summary>Text</summary>
+            <div class="ps-3">
+                {{ record.alltext }}
+            </div>
+        </details>
     </div>
     <div>
-        {{ record.values }}
+        <details>
+            <summary>Results</summary>
+            <div class="ps-3">
+                {% for word in record.values %}
+                <div>
+                    {{word}}
+                </div>
+                {% endfor %}
+            </div>
+        </details>
     </div>
     </div>
 </div>

@@ -2,10 +2,13 @@
   <h5 class="card-header">Integer | {{ record.generated_at }}</h5>
   <div class="card-body text-dark">
     <div class="card-text">
-      Generated {{ record.count }} integers in range from {{ record.floor }} to {{ record.ceiling }}.
+      Generated <mark>{{ record.count }} integers</mark> <i>in range</i> from {{ record.floor }} to {{ record.ceiling }}.
     </div>
-    <div>
-      {{ record.values }}
-    </div>
+    <details>
+      <summary>Results</summary>
+      <div class="ps-3">
+        {{ record.values }}
+      </div>
+    </details>
   </div>
 </div>

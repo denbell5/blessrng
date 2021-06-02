@@ -2,35 +2,46 @@
 
 {% block content %}
 
-<!-- check if there is any entry-->
-{% if dto.entries %}
-<!-- get 5 entries -->
-{% for record in dto.entries %}
-{% include "./widgets/entry_record.html" with record=record only %}
-{% endfor %}
-<ul class="pagination justify-content-center">
-    <li class="">
-        {% if page_obj.has_previous %}
-        {% if page_obj.number != 2 %}
-            <a class="btn btn-light col-auto btn-outline-dark" href="?page=1">1</a>
+<div class="row justify-content-center mt-5 mb-3">
+    <div class="col-lg-7 col-md-10">
+        <!-- check if there is any entry-->
+        {% if dto.entries %}
+        <h3 class="text-center">Request history</h3>
+        <!-- get 5 entries -->
+        {% for record in dto.entries %}
+        {% include "./widgets/entry_record.html" with record=record only %}
+        {% endfor %}
+        <ul class="pagination justify-content-center">
+            <li class="">
+                {% if page_obj.has_previous %}
+                {% if page_obj.number != 2 %}
+                <a class="btn btn-light col-auto btn-outline-dark" href="?page=1">1</a>
+                {% endif %}
+                <a class="btn btn-light btn-outline-dark" href="?page={{ page_obj.previous_page_number }}">
+                    {{page_obj.previous_page_number }}
+                </a>    
+                {% endif %}
+                <span class="current active btn btn-light btn-outline-secondary">
+                    {{ page_obj.number }}
+                </span>
+                {% if page_obj.has_next %}
+                <a class="btn btn-light btn-outline-dark" href="?page={{ page_obj.next_page_number }}">
+                    {{page_obj.next_page_number}}
+                </a>
+                {% if page_obj.number != page_obj.paginator.num_pages|add:"-1" %}
+                <a class="btn btn-light btn-outline-dark" href="?page={{ page_obj.paginator.num_pages }}">
+                    {{page_obj.paginator.num_pages }}
+                </a>
+                {% endif %}
+                {% endif %}
+            </li>
+        </ul>
+        {% else %}
+        <h3 class="row justify-content-center">You have no entries yet</h1>
         {% endif %}
-            <a class="btn btn-light btn-outline-dark" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
-        {% endif %}
-        <span class="current active btn btn-light btn-outline-secondary">
-            {{ page_obj.number }}
-        </span>
-        {% if page_obj.has_next %}
-            <a class="btn btn-light btn-outline-dark"  href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-        {% if page_obj.number != page_obj.paginator.num_pages|add:"-1" %}
-            <a class="btn btn-light btn-outline-dark" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
-        {% endif %}
-        {% endif %}
-    </li>
-</ul>
+    </div>
+</div>
 
-{% else %}
-<h1 class="row justify-content-center">You have no entries yes</h1>
-{% endif %}
 
 
 {% endblock %}
