@@ -11,28 +11,31 @@ class StatSetBaseDto:
 
 
 class StatDto:  # dto for all statistics: latest 10 requests, total requests, total from anon etc.
-    def __init__(self, latest: List[StatSetBaseDto],site_stat, user_stat, random_entry: StatSetBaseDto):
+    def __init__(self, latest: List[StatSetBaseDto], site_stat, user_stat, random_entry: StatSetBaseDto):
         self.latest = latest
         self.site_stat = site_stat
         self.user_stat = user_stat
         self.random_entry = random_entry
 
+
 class AllEntriesDto:
-    def __init__(self, entries:List[StatSetBaseDto]):
+    def __init__(self, entries: List[StatSetBaseDto]):
         self.entries = entries
 
 
-
 class SiteStatDto:
-    def __init__(self, int_gen_count,
-                 pwd_gen_count,
-                 word_gen_count,
-                 total_gen_count,
-                 anon_gen_count,
-                 registered_gen_count,
-                 registered_users,
-                 avg_gen_per_user):
-        
+
+    def __init__(
+        self,
+        int_gen_count,
+        pwd_gen_count,
+        word_gen_count,
+        total_gen_count,
+        anon_gen_count,
+        registered_gen_count,
+        registered_users,
+        avg_gen_per_user,
+    ):
         self.int_gen_count = int_gen_count
         self.pwd_gen_count = pwd_gen_count
         self.word_gen_count = word_gen_count
@@ -43,6 +46,16 @@ class SiteStatDto:
         self.registered_gen_count = registered_gen_count
         self.registered_users = registered_users
         self.avg_gen_per_user = avg_gen_per_user
+
+    def int_gen_percent(self):
+        return round((self.int_gen_count / self.total_gen_count) * 100)
+
+    def pwd_gen_percent(self):
+        return round((self.pwd_gen_count / self.total_gen_count) * 100)
+
+    def word_gen_percent(self):
+        return 100 - self.int_gen_percent() - self.pwd_gen_percent()
+
 
 class UserStatDto:
     def __init__(self, int_gen_count,
