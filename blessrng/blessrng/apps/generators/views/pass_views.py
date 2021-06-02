@@ -33,7 +33,7 @@ def __password_post(request: HttpRequest):
     passwords = []
     errors = []
     if (password_count < 1 or password_count >= 10):
-        errors.append("'Count' must be between 1 and 10 exclusive.")
+        errors.append("'Count' must be between 1 and 10.")
     if (password_length >= 64):
         errors.append("'length' must be less than 64 characters.")
     if (password_length < 1):
