@@ -3,20 +3,13 @@
 {% block content %}
 
 <div class="row justify-content-center">
-    <div class="col-auto">
+    <div class="col-lg-5 col-md-9">
 
         <div class="row">
             <div class="col-12">
-                <h1 class="display-6">Generate words</h1>
+                <h1 class="display-6 text-center">Generate words from</h1>
                 {% if errors %}
-                <div class="card border-danger mb-3" id="errors">
-                    <div class="card-header">Error something went wrong </div>
-                    <div class="card-body text-danger">
-                        {% for error in errors %}
-                        <div>{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                </div>
+                {% include "./widgets/form_errors.html" with errors=errors only %}
                 {% endif %}
                 <form action="{% url 'generators:word' %}" method="post" autocomplete="off" id="word-form">
                     {% csrf_token %}
@@ -38,40 +31,40 @@
                     </div>
                     <div class="mb-3">
                         <label for="ceiling" class="form-label">Number of words</label>
-                        <input type="number" class="form-control" id="number" name="number" placeholder="0"
+                        <input type="number" class="form-control" id="number" name="number" placeholder="1"
                             value="{{ word_dto.number|default_if_none:"" }}" />
                     </div>
             </div>
             <div>
-                <input type="submit" value="Generate" class="btn btn-outline-secondary form-control1">
+                <input type="submit" value="Generate" class="btn btn-outline-secondary form-control">
             </div>
             </form>
         </div>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            {% if word_dto.value %}
-            <h1 class="display-6 mt-4">Result</h1>
-            <div class="d-flex justify-content-end">
-                <div title="Copy to clipboard" onclick="copyToClipboardFrom(this, 'word-results', 'div')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-clipboard clickable-icon" viewBox="0 0 16 16">
-                        <path
-                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                        <path
-                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                    </svg>
+        <div class="row">
+            <div class="col-12 text-center">
+                {% if word_dto.value %}
+                <h1 class="display-6 mt-4">Result</h1>
+                <div class="d-flex justify-content-end">
+                    <div title="Copy to clipboard" onclick="copyToClipboardFrom(this, 'word-results', 'div')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-clipboard clickable-icon" viewBox="0 0 16 16">
+                            <path
+                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                            <path
+                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                        </svg>
+                    </div>
                 </div>
-            </div>
-            <div class="col text-center" id="word-results">
-                {% for value in word_dto.value %}
-                <div>{{ value }}</div>
-                {% endfor %}
-                {% else %}
-                {% endif %}
-                {% endblock %}
-            </div>
+                <div class="col text-center" id="word-results">
+                    {% for value in word_dto.value %}
+                    <div>{{ value }}</div>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                    {% endblock %}
+                </div>
 
+            </div>
         </div>
     </div>
 </div>

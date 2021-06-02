@@ -9,14 +9,7 @@
 			<div class="col-auto">
 				<h1 class="display-6">Generate integers in range</h1>
 				{% if errors %}
-				<div class="card border-danger mb-3" id="errors">
-					<div class="card-header">Something went wrong.</div>
-					<div class="card-body text-danger">
-						{% for error in errors %}
-						<div>{{ error }}</div>
-						{% endfor %}
-					</div>
-				</div>
+				{% include "./widgets/form_errors.html" with errors=errors only %}
 				{% endif %}
 				<form action="{% url 'generators:integer' %}" method="post" autocomplete="off" id="int-form">
 					{% csrf_token %}

@@ -34,7 +34,6 @@ def __create_word_response(request: HttpRequest, dto: RandomWordDto, errors: Lis
 
 def __word_post(request):
     # map
-
     alltext = request.POST['alltext']
     alltext = '' if alltext == "" else str(alltext)
     number = request.POST['number']
@@ -44,25 +43,23 @@ def __word_post(request):
     words = leters.split()
     number__of_words = len(words)
     value = ""
-    # validator
+
+    # validate
     errors = []
     if not alltext.strip():
-        errors.append("Please input some words")
-        #dto = RandomWordDto(alltext, number, value)
-        # return __create_word_response(request, dto, errors)
-    if number < 0 or number == 0:
-        errors.append(
-            'You need to input only positive numbers bigger than 0 !')
-        #dto = RandomWordDto(alltext, number, value)
-        # return __create_word_response(request, dto, errors)
+        errors.append("'Text' must contain at least 1 word.")
+    if number < 1:
+        errors.append("'Number of words' can not be less than 1.")
     if number__of_words < number:
-        errors.append('Error you need to input correct number of words!')
-        #dto = RandomWordDto(alltext, number, value)
-        # return __create_word_response(request, dto, errors)
+        errors.append(
+            "'Number of words' can not be greater than word count in the text.")
     if (len(errors) != 0):
         dto = RandomWordDto(alltext, number, None)
         return __create_word_response(request, dto, errors)
+
+    # generate
     value = random.sample(words, number)
+
     # save
     timestamp = datetime.now(timezone.utc)
     wordSet = RandWordSet(
