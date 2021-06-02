@@ -36,40 +36,46 @@ def __word_post(request):
     # map
     alltext = request.POST['alltext']
     alltext = '' if alltext == "" else str(alltext)
-    number = request.POST['number']
-    number = 1 if number == '' else int(number)
-    leters = "".join(list(
-        map(str, (re.sub(r"[^a-zA-Z0-9-А-Яа-яёЁЇїІіЄєҐґ]+", ' ', alltext)))))
-    words = leters.split()
+    generate_count = request.POST['number']
+    generate_count = 1 if generate_count == '' else int(generate_count)
+    letters = "".join(
+        list(map(str, (
+            re.sub(r"[^a-zA-Z0-9-А-Яа-яёЁЇїІіЄєҐґ]+",
+            ' ',
+            alltext
+        ))))
+    )
+        
+    words = letters.split()
     number__of_words = len(words)
-    value = ""
+    values = ""
 
     # validate
     errors = []
     if not alltext.strip():
         errors.append("'Text' must contain at least 1 word.")
-    if number < 1:
+    if generate_count < 1:
         errors.append("'Number of words' can not be less than 1.")
-    if number__of_words < number:
+    if number__of_words < generate_count:
         errors.append(
             "'Number of words' can not be greater than word count in the text.")
     if (len(errors) != 0):
-        dto = RandomWordDto(alltext, number, None)
+        dto = RandomWordDto(alltext, generate_count, None)
         return __create_word_response(request, dto, errors)
 
     # generate
-    value = random.sample(words, number)
+    values = random.sample(words, generate_count)
 
     # save
     timestamp = datetime.now(timezone.utc)
     wordSet = RandWordSet(
         user=None if request.user.is_anonymous else request.user,
         generated_at=timestamp,
-        count=number,
+        count=generate_count,
         all_text=alltext,
-        values=value,
+        values=values,
     )
     wordSet.save()
 
-    dto = RandomWordDto(alltext, number, value)
+    dto = RandomWordDto(alltext, generate_count, values)
     return __create_word_response(request, dto, errors)
