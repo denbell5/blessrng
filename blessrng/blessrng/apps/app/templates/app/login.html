@@ -12,6 +12,14 @@
                         {% csrf_token %}
                         <h1 class="display-1 fs-3 text-muted">Use a local account to log in.</h1>
                         <hr />
+                        {% if form.errors %}   
+                        <div class="card border-danger mb-3" id="errors">
+                            <div class="card-header">Something went wrong.</div>
+                            <div class="card-body text-danger">
+                            <div class="validation-summary-errors">Please enter a correct user name and password.</div>
+                            </div>
+                        </div>
+                        {% endif %}
                         <div class="form-group">
                             <label for="id_username" class="control-label">User name</label>
                             <div>
@@ -24,9 +32,6 @@
                                 {{ form.password }}
                             </div>
                         </div>
-                        {% if form.errors %}
-                        <p class="validation-summary-errors">Please enter a correct user name and password.</p>
-                        {% endif %}
                         <div class="form-group mt-3">
                             <div class="col-lg-offset-2 col">
                                 <input type="hidden" name="next" value="/" />
