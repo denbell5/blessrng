@@ -2,6 +2,19 @@
 
 {% block content %}
 
+<div class="row justify-content-center mt-5 mb-3">
+    <div class="col-lg-7 col-md-10">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+                <p>Facts are stubborn things, but statistics are pliable.</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Mark Twain
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
 {% include "./widgets/stat_common.html" %}
 
 {% if dto.user_stat.user_id%}
@@ -10,21 +23,30 @@
 <!-- check if it is any entry -->
 {% if dto.random_entry %}
 <!-- get random entry -->
-<h1>Random Entry</h1>
-{% include "./widgets/entry_record.html" with record=dto.random_entry only %}
-
-<!-- get latest 10 entries -->
-<div class="row">
-    <h1 class="col-3">Latest 10 entries</h1>
-    <ul class="col-auto nav navbar-nav"><li><a class="nav-link fs-3 fw-light " href="{% url 'generators:all_entries' %}" >(See all)</a></li></ul>
-</div>
-{% for record in dto.latest %}
-{% include "./widgets/entry_record.html" with record=record only %}
-{% endfor %}
-
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-7 col-md-10">
+        <div class="fs-5">Please check out this</div>
+        <h3>Random request</h3>
+        <div class="mb-1">It's yours and it's just here...</div>
+        {% include "./widgets/entry_record.html" with record=dto.random_entry only %}
+        <!-- get latest 10 entries -->
+        <div class="fs-5 mt-5">Also take a look at your</div>
+        <h3>
+            Latest 10 requests
+            <a class="text-decoration-none fs-3" href="{% url 'generators:all_entries' %}">
+                (See all)
+            </a>
+        </h3>
+        {% for record in dto.latest %}
+        {% include "./widgets/entry_record.html" with record=record only %}
+        {% endfor %}
+    </div>
+        
 {% else %}
-<h1 class="row justify-content-center">You have no entries yes</h1>
+        <h1 class="row justify-content-center">You have no entries yet</h1>
 {% endif %}
+</div>
+
 
 
 
