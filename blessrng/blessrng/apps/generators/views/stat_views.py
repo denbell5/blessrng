@@ -31,7 +31,7 @@ def stat(request: HttpRequest):
     registered_gen_count = total_gen_count - anon_gen_count
 
     registered_users = User.objects.count()
-    avg_gen_per_user = registered_gen_count / registered_users
+    avg_gen_per_user = round(registered_gen_count / registered_users)
 
     site_stat_dto = SiteStatDto(int_gen_count, pwd_gen_count, word_gen_count, total_gen_count, anon_gen_count, registered_gen_count, registered_users, avg_gen_per_user)
     

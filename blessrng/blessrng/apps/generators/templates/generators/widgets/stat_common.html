@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-lg-7 col-md-10">
+    <div>
+      <span class="fs-5">
+        <i>Since the date</i>, when the very first values were generated...
+      </span>
+      <br>
+      Our service has collected
+      <b>{{ dto.site_stat.total_gen_count }}</b>
+      generation requests <b>in total</b>.
+      <b>{{ dto.site_stat.anon_gen_count }}</b>
+      of them coming <b>from anonymous</b> users, and
+      <b>{{ dto.site_stat.registered_gen_count }}</b>
+      - <b>from registered</b> ones.
+      Thus, if we count <i>only registered users</i>,
+      in average,
+      <b>one person has tried</b> blessrng generation power about
+      <b>{{ dto.site_stat.avg_gen_per_user }} times</b>.
+    </div>
+    <div class="mt-4 fs-5">
+      Having this information above, we can definetely say that...
+    </div>
+    <div class="mt-1">
+      <b><i>Integer</i></b> numbers <b>generation</b>
+      <b>takes {{dto.site_stat.int_gen_percent}}%</b>
+      of the whole thing, counting
+      <b>{{dto.site_stat.int_gen_count}} requests.</b>
+    </div>
+    <div class="mt-1">
+      <b><i>Password</i></b> <b>generation</b>, in turn, has
+      <b>{{dto.site_stat.pwd_gen_count}} requests</b> and
+      <b>takes {{dto.site_stat.pwd_gen_percent}}%</b>.
+    </div>
+    <div class="mt-1 mb-3">
+      Last, <i>but not least</i>, <b><i>random words</i></b>
+      from text <b>generation</b> has
+      <b>{{dto.site_stat.word_gen_count}} requests</b> and
+      <b>takes {{dto.site_stat.word_gen_percent}}%</b>
+      of the total {{X}} generations.
+    </div>
+  </div>
+</div>
+
+{% if dto.user_stat.user_id %}
+<div class="row justify-content-center mt-3">
+  <div class="col-lg-7 col-md-10">
+    <div class="fs-5">
+      Talking about <i>your</i> statistics...
+    </div>
+    <div>
+      You tried <b>blessrng generation</b>
+      <i>probably not less</i> than
+      <b>{{dto.user_stat.total_gen_count}} times</b>.
+    </div>
+    <div>
+      <b><i>Integers</i></b> were generated
+      <b>{{dto.user_stat.int_gen_count}} times</b>.
+    </div>
+    <div>
+      Count of the
+      <b><i>password</i> generation</b> is
+      <b>{{dto.user_stat.pwd_gen_count}}</b>.
+    </div>
+    <div>
+      <i>And</i> you've got
+      <b><i>random words</i></b> from some texts
+      <b>{{dto.user_stat.word_gen_count}} times</b>.
+    </div>
+  </div>
+</div>
+{% endif %}

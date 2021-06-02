@@ -2,17 +2,11 @@
 
 {% block content %}
 
-    <div class="row justify-content-center">
-     {% include "./widgets/site_stat.html" %}
+{% include "./widgets/stat_common.html" %}
 
-<!-- if user is not anonymous -->
 {% if dto.user_stat.user_id%}
      
-     {% include "./widgets/user_stat.html" %}
-        
-    </div>
-
-    <!-- get all entries -->
+<!-- get all entries -->
 <!-- check if it is any entry -->
 {% if dto.random_entry %}
 <!-- get random entry -->
