@@ -4,13 +4,13 @@
 
 <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7 col-sm-8">
-        <h1 class="display-1 fs-1">{{ title }}</h1>
+        <h1 class="display-1 fs-1">Sign in</h1>
         <div class="row">
             <div class="col-12">
                 <section id="loginForm">
                     <form action="." method="post" class="form-horizontal">
                         {% csrf_token %}
-                        <h1 class="display-1 fs-3 text-muted">Use a local account to log in.</h1>
+                        <h1 class="display-1 fs-3 text-muted">Use a local account to sign in.</h1>
                         <hr />
                         {% if form.errors %}   
                         <div class="card border-danger mb-3" id="errors">
@@ -35,7 +35,7 @@
                         <div class="form-group mt-3">
                             <div class="col-lg-offset-2 col">
                                 <input type="hidden" name="next" value="/" />
-                                <input type="submit" value="Log in" class="btn btn-outline-secondary form-control" />
+                                <input type="submit" value="Sign in" class="btn btn-outline-secondary form-control" />
                             </div>
                         </div>
                     </form>
@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col mt-3">
                 <a class="text-decoration-none" href="{% url 'social:begin' 'google-oauth2' %}">
-                    Login with Google
+                    Sign in with Google
                 </a>
             </div>
         </div>
