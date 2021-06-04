@@ -48,6 +48,8 @@ def __integer_post(request: HttpRequest):
         errors.append("'Length' must be between 1 and 100 exclusive.")
     if (floor > ceiling):
         errors.append("'From' can not be greater than 'To'.")
+    if (floor < -1000000000 or ceiling > 1000000000):
+        errors.append("Integer must be in range (-1 000 000 000, 1 000 000 000)")
     if (len(errors) != 0):
         dto = RandomIntDto(count, floor, ceiling, None)
         return __create_integer_response(request, dto, errors)
