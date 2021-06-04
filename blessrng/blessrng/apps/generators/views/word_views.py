@@ -52,6 +52,8 @@ def __word_post(request):
 
     # validate
     errors = []
+    if alltext.lower().__contains__(' ну ') or alltext.lower().__contains__('ну,'):
+        errors.append("Без 'ну'.")
     if not alltext.strip():
         errors.append("'Text' must contain at least 1 word.")
     if generate_count < 1:
